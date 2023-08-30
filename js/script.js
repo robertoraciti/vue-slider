@@ -43,6 +43,7 @@ createApp({
         },
       ],
       activeSlide: 0,
+      autoplay: false,
     };
   },
   methods: {
@@ -64,5 +65,24 @@ createApp({
     thumbClick(index) {
       this.activeSlide = index;
     },
+
+    setAutoplay() {
+      if (!this.autoplay) {
+        this.autoplay = setInterval(() => {
+          this.goNext();
+        }, 3000);
+      }
+    },
+
+    stopAutoplay() {
+      if (this.autoplay) {
+        clearInterval(this.autoplay);
+        this.autoplay = false;
+      }
+    },
+  },
+
+  created() {
+    this.setAutoplay();
   },
 }).mount("#app");
